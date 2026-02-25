@@ -90,37 +90,53 @@
         .card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--gold); }
 
         .slider-container {
-    width: 100%;
-    overflow: hidden; /* Hides the slides that aren't active */
-    position: relative;
-}
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+        }
+        .slide {
+            min-width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active { background-color: var(--gold); }
 
-.slider {
-    display: flex; /* Lines up slides horizontally */
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Makes the slide smooth */
-    width: 100%;
-}
-
-.slide {
-    min-width: 100%; /* Each slide takes up the full container width */
-    padding: 20px;
-    text-align: center;
-}
-
-.dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.dot.active {
-    background-color: var(--gold); /* Your gold color variable */
-}
+        /* ── NEW: View All Reviews Link ── */
+        .reviews-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid rgba(253,187,45,0.4);
+            padding: 7px 18px;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        .reviews-link:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
 
         /* ADMISSION BOT */
         .bot-box {
@@ -147,42 +163,27 @@
         footer { background: #050c18; color: white; padding: 50px 10% 20px; text-align: center; }
 
        @media (max-width: 850px) {
-    .menu-toggle { 
-        display: block; 
-        z-index: 1001;
-    }
-
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed; /* Changed from absolute for better coverage */
-        top: 0;
-        right: -100%; /* Start off-screen */
-        width: 100%;
-        height: 100vh;
-        background: var(--navy);
-        transition: 0.4s ease-in-out;
-        z-index: 999;
-    }
-
-    .nav-links.active {
-        right: 0; /* Slide in */
-    }
-
-    .nav-links li {
-        margin: 20px 0; /* Vertical spacing for mobile */
-        margin-left: 0; 
-    }
-
-    .nav-links a {
-        font-size: 1.5rem; /* Larger text for mobile */
-    }
-
-    .grid { grid-template-columns: 1fr; text-align: center; }
-    .collage-container { grid-template-columns: repeat(2, 1fr); }
-}
+            .menu-toggle { display: block; z-index: 1001; }
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--navy);
+                transition: 0.4s ease-in-out;
+                z-index: 999;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 20px 0; margin-left: 0; }
+            .nav-links a { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; text-align: center; }
+            .collage-container { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -255,31 +256,37 @@
         </div>
     </section>
 
+    <!-- REVIEWS SECTION — heading is now a link -->
     <section class="section">
-    <h2 class="section-title">What Our Students Say</h2>
-    <div class="slider-container">
-        <div class="slider" id="slider">
-            <div class="slide"><p>"The personalized mock interviews with Naval Sir changed my perspective. I learned how to project my true self!"</p><h4>Sukeshi Singh</h4></div>
-            <div class="slide"><p>"The GTO simulations at the academy are exactly like the actual boards. It took away all my stage fear."</p><h4>Suryansh Bhati</h4></div>
-            <div class="slide"><p>"Focus on OLQs and personality profiling helped me clear TES in my first attempt. Highly recommended!"</p><h4>Aman Kumar</h4></div>
-            
-            <div class="slide"><p>"I got recommended for TES-52 from 22SSB Bhopal. Naval Saini sir is a real hard task master and his guidance helped me increase my confidence immensely."</p><h4>Priyanshu</h4></div>
-            <div class="slide"><p>"The best academy for SSB preparation in Chandigarh. The individual attention given by the assessors helps in identifying our own weak areas."</p><h4>Lucky</h4></div>
-            <div class="slide"><p>"Arjun Path Academy provides the most realistic environment for psychology tests. Naval Sir's insights are unparalleled."</p><h4>Summer</h4></div>
-            <div class="slide"><p>"The transformation I felt in my personality after the 14-day course was amazing. It's not just coaching; it's character building."</p><h4>Anubhav</h4></div>
-        </div>
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <div class="slide"><p>"Naval Saini Sir is an excellent mentor for NDA SSB preparation. His guidance is clear and focused on building the right officer-like qualities. The constant support, honest feedback, and motivation made all the difference."</p><h4>Shivansh Sharma</h4></div>
+                <div class="slide"><p>"It's been a great learning experience with Naval Sir. His teaching style is unique — we learned by doing things that were more in the form of games than tasks. He tells students what is exactly needed and it improves life beyond SSB prep."</p><h4>Harsh Bhati</h4></div>
+                <div class="slide"><p>"Sir's guidance has been of utmost importance in my recommendation. Sir guides every individual on the part he has to work upon and builds a student confident, fluent and ready."</p><h4>Rakshit Chauhan</h4></div>
+                <div class="slide"><p>"No matter how good you are, the final touches are always added by the right guidance. My experience with Sir has been truly wonderful — daily lecturette practices helped me transform completely."</p><h4>Rohinish Kaler</h4></div>
+                <div class="slide"><p>"I had an incredible experience under the guidance of Gp Capt Naval Sir. His approach to SSB coaching is highly personalized, which truly sets the academy apart. Every session was tailored to help me understand myself."</p><h4>Bhakti</h4></div>
+                <div class="slide"><p>"Sir's way of guidance leads to success not just within these walls but in life itself. Taught us to smile and face every challenge with confidence."</p><h4>Better Alone</h4></div>
+                <div class="slide"><p>"Every candidate who is serious about getting into the defence forces must come here. Grp Cap Naval Saini sir has a very clear vision — he's here to help those who don't know how to help themselves get selected."</p><h4>Shweta Malik</h4></div>
+                <div class="slide"><p>"It wasn't just coaching for us — he made us prepared for life. Endless lecturettes and group discussions elevated our confidence and brought out the originality in each of us."</p><h4>Kartik A Patil</h4></div>
+                <div class="slide"><p>"The mentorship here was not just about clearing the interview, but about shaping us into a better version of ourselves. I want to express my heartfelt gratitude for the academy's invaluable guidance."</p><h4>Yash Chaudhary</h4></div>
+                <div class="slide"><p>"I got Recommended for Service Entry PCSL (RO) in May 2025. My heartfelt thanks to Gp Capt Naval Saini Sir for his guidance and personal mentorship which helped me improve my content, confidence and overall personality."</p><h4>Prasad Reddy</h4></div>
+                <div class="slide"><p>"His method was very practical and the best thing was that he analysed me properly. Practice the way officers do — that was the best advice I received."</p><h4>Abhi Singh</h4></div>
+                <div class="slide"><p>"He behaves more as a friend than a mentor and he comes to know about your inner self — that is how he guides you. Believe me, go and give yourself a chance."</p><h4>Akash Lodhi</h4></div>
+                <div class="slide"><p>"Arjun Path Defence Academy is one of its kind. They do not make you cram things — they make you familiar with the testing procedure and help you realize your weaknesses and what is expected of you."</p><h4>Seemant Verma</h4></div>
+                <div class="slide"><p>"Group Captain Naval Saini Sir really helped me and all my fellow batchmates to develop and polish what it takes to get recommended. It was the best choice I ever made."</p><h4>Akshansh Jaswal</h4></div>
+                <div class="slide"><p>"I have personally sent four aspirants to Gp Capt Naval Saini and all four got recommended. His vast experience in SSB and sincere personalised approach for each student is genuine and unmatched."</p><h4>Vikram Seth</h4></div>
+                <div class="slide"><p>"This is the place which will transform you for sure. Sir will guide you in every step. It's not just an academy — it's a place where one-to-one interaction is the norm."</p><h4>Karan Yuvraj</h4></div>
+                <div class="slide"><p>"Perfect place for chasing dreams. Naval Sir personally helped me reach where I wanted — NDA. He is very approachable and helpful for clearing SSB. A must-go experience."</p><h4>Kartik Sharma</h4></div>
+                <div class="slide"><p>"The atmosphere of the academy is positive and charged. The faculty is experienced and very friendly. The academy gives feedback on each candidate and clears every doubt."</p><h4>Madhu Malik</h4></div>
+                <div class="slide"><p>"Once you join the Arjun Path Academy, I bet you are surely going to improve! Thanks for the guidance GC Saini Sir!"</p><h4>Sumer Dhiman</h4></div>
+                <div class="slide"><p>"It has been an honor to get in touch with such a gentleman who very well knows where to polish a diamond and let him shine. Here at Arjun Path Academy, you discover your best self."</p><h4>Himanshu Choudhary</h4></div>
+            </div>
 
-        <div style="text-align:center; margin-top:20px;">
-            <span class="dot active" onclick="setSlide(0)"></span>
-            <span class="dot" onclick="setSlide(1)"></span>
-            <span class="dot" onclick="setSlide(2)"></span>
-            <span class="dot" onclick="setSlide(3)"></span>
-            <span class="dot" onclick="setSlide(4)"></span>
-            <span class="dot" onclick="setSlide(5)"></span>
-            <span class="dot" onclick="setSlide(6)"></span>
+            <div style="text-align:center; margin-top:20px;" id="dots-container">
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section class="section" style="text-align: center; background: #f4f7f6;" id="contact">
         <h2 class="section-title">Get in Touch with Our Expert</h2>
@@ -296,14 +303,33 @@
 
     <section class="section" id="results">
         <h2 class="section-title" style="text-align: center;">Our Recommended Heroes</h2>
+        
         <div class="collage-container">
-            <div class="collage-item large"><img src="asset/st1.avif"></div>
+            <div class="collage-item"><img src="asset/st1.avif"></div>
             <div class="collage-item"><img src="asset/st2.avif"></div>
-            <div class="collage-item tall"><img src="asset/st3.jpeg"></div>
+            <div class="collage-item"><img src="asset/st3.jpeg"></div>
             <div class="collage-item"><img src="asset/st4.avif"></div>
-            <div class="collage-item large"><img src="asset/st5.avif"></div>
+            <div class="collage-item "><img src="asset/st5.avif"></div>
             <div class="collage-item"><img src="asset/st6.avif"></div>
+            <div class="collage-item"><img src="asset/st7.avif"></div>
+            <div class="collage-item"><img src="asset/st8.avif"></div>
+            <div class="collage-item"><img src="asset/st9.avif"></div>
+            <div class="collage-item"><img src="asset/st10.avif"></div>
+            <div class="collage-item"><img src="asset/st11.jpeg"></div>
+            <div class="collage-item"><img src="asset/st12.jpeg"></div>
+            <div class="collage-item"><img src="asset/st13.jpeg"></div>
+            <div class="collage-item"><img src="asset/st14.jpeg"></div>
+            <div class="collage-item"><img src="asset/st15.jpeg"></div>
+            <div class="collage-item"><img src="asset/st16.jpeg"></div>
+            <div class="collage-item"><img src="asset/st17.jpeg"></div>
+            <div class="collage-item"><img src="asset/st18.jpeg"></div>
+            <div class="collage-item"><img src="asset/st19.jpeg"></div>
+            <div class="collage-item"><img src="asset/st21.jpeg"></div>
+            <div class="collage-item"><img src="asset/st22.jpeg"></div>
+            <div class="collage-item"><img src="asset/st23.jpeg"></div>
+            
         </div>
+        
     </section>
 
     <div class="lightbox" id="lightbox">
@@ -319,52 +345,60 @@
     <a href="https://wa.me/9482577331" class="whatsapp-float" target="_blank">💬</a>
 
     <script>
-        // 1. Find the buttons on the page
-const menuToggle = document.getElementById('mobile-menu'); // The hamburger icon
-const navList = document.getElementById('nav-list');       // The list of links
-const navLinks = document.querySelectorAll('.nav-links a'); // Every individual link
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const navLinks = document.querySelectorAll('.nav-links a');
 
-// 2. Tell the menu to open/close when the hamburger is clicked
-menuToggle.addEventListener('click', () => {
-    navList.classList.toggle('active');
-    
-    // Change the icon from ☰ to X when open
-    if (navList.classList.contains('active')) {
-        menuToggle.innerHTML = '✕';
-    } else {
-        menuToggle.innerHTML = '☰';
-    }
-});
-
-// 3. Tell the menu to CLOSE when any link is clicked
-// (So it doesn't stay open after you jump to a section)
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navList.classList.remove('active');
-        menuToggle.innerHTML = '☰';
-    });
-});
-let currentSlide = 0;
-    const slider = document.getElementById('slider');
-    const dots = document.querySelectorAll('.dot');
-
-    function setSlide(index) {
-        currentSlide = index;
-        
-        // Calculate the percentage to slide (100% per slide)
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-        // Update active dot
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentSlide);
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuToggle.innerHTML = navList.classList.contains('active') ? '✕' : '☰';
         });
-    }
 
-    // Optional: Auto-slide every 5 seconds
-    setInterval(() => {
-        currentSlide = (currentSlide + 1) % dots.length;
-        setSlide(currentSlide);
-    }, 5000);
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                menuToggle.innerHTML = '☰';
+            });
+        });
+
+        const slider = document.getElementById('slider');
+        const slides = slider.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dots-container');
+        let currentSlide = 0;
+
+        // Build dots dynamically
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => setSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+
+        function setSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            setSlide(currentSlide);
+        }, 5000);
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const collageItems = document.querySelectorAll('.collage-item img');
+
+        collageItems.forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.classList.add('active');
+                lightboxImg.src = img.src;
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
     </script>
 </body>
 </html>
